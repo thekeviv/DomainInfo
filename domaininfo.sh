@@ -35,7 +35,7 @@ else
         # 3. It then removes "://" from the argument (If they exist)
         echo $1 | sed 's/^https//' | sed 's/^http//' | sed 's/^:\/\///' | sed 's/^www.//'
     else
-        echo "lol"
+        echo "Error: Couldn't parse the supplied value to a URL/Email or an IP Address. Make sure the supplied value doesn't have a typo."
     fi
 fi
 
