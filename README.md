@@ -1,7 +1,8 @@
 # DomainInfo
 
 The script takes as input a domain name/IP Address/Email and prints info about the domain name. The info is collected by using 
-whois, dig and host UNIX commands. Since it uses the mentioned UNIX, the script will not work on Windows unless you use WSL.
+whois, dig and host UNIX commands and it then uses awk and sed to format the input. Since it uses the mentioned UNIX,
+the script will not work on Windows unless you use WSL.
 
 ## Sample 
 ```shell
@@ -95,5 +96,4 @@ The script was written for the lab assignment of SENG460 course at the Universit
 
 ## Future TODO
 
-1. Add windows support
-
+1. Improve regex logic for parsing domain from url (will fail if the URL has query params or a path in it or the URL has subdomains in it.
