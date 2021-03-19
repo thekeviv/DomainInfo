@@ -11,6 +11,14 @@ ipregex="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]
 emailregex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
 # Regex taken from https://stackoverflow.com/questions/3183444/check-for-valid-link-url but modified to make the protocol optional
 urlregex="[(https?|ftp|file)://]*[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]"
+#ascii art generated using https://textkool.com/en/test-ascii-art-generator?text=domaininfo
+asciiart="██████╗  ██████╗ ███╗   ███╗ █████╗ ██╗███╗   ██╗██╗███╗   ██╗███████╗ ██████╗ 
+██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝██╔═══██╗
+██║  ██║██║   ██║██╔████╔██║███████║██║██╔██╗ ██║██║██╔██╗ ██║█████╗  ██║   ██║
+██║  ██║██║   ██║██║╚██╔╝██║██╔══██║██║██║╚██╗██║██║██║╚██╗██║██╔══╝  ██║   ██║
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║  ██║██║██║ ╚████║██║██║ ╚████║██║     ╚██████╔╝
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ 
+                                                                               "
 
 # The function takes a name and a value obtained using the whois linux command and 
 # pretty prints it using awk
@@ -51,7 +59,8 @@ function process_arg {
 
     # if the supplied arg is an IP address, then find it's host name. Otherwise, find the IP address for the 
     # hostname
-    
+    echo "$asciiart"
+    echo
     if [[ $2 =~ "IP" ]]; 
     then
         echo "domaininfo - Querying domain info for IP Address: $1" 
