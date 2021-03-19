@@ -134,7 +134,7 @@ function process_arg {
 
 if [ $# -gt 1 -o $# -lt 1 ]
 then 
-    echo "Error: Only one argument allowed. The expected input for the command is domaininfo {domain name}"
+    echo "Error: Only one argument allowed and is required. The expected input for the command is domaininfo {domain name}"
 else
     # Step 1.a - Check if the input is an IPv4 address
     if [[ $1 =~ $ipregex ]]; 
