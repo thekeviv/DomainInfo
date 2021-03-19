@@ -17,7 +17,8 @@ function print_whois_value {
 }
 
 function print_records {
-    if [[ $3 -gt 1 ]];
+    # If there's more than one characters in the record, then print it
+    if [[ $(echo "$1" | sed  's/^[n ]*//g;s/[n ]*$//g' | wc -c)  -gt 1 ]];
     then
         echo
         echo "The following $2 Records for the domain/IP Address were found:"
@@ -79,13 +80,8 @@ function process_arg {
     dnsserver1address=$(echo "$whoisoutput" | awk '/Name Server:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     
     mxrecords=$(echo "$digmxoutput" | awk '/IN.*MX/ && length($7)>1 { print $7; }' FS='[\t ]')
-    mxrecordslength=$(echo "$mxrecords" | sed  's/^[n ]*//g;s/[n ]*$//g' | wc -c) 
-
     arecords=$(echo "$digaoutput" | awk '/IN.*A/ && length($6)>1 { print $6; }' FS='[\t ]')
-    arecordslength=$(echo "$arecords" | sed  's/^[n ]*//g;s/[n ]*$//g' | wc -c) 
-
     txtrecords=$(echo "$digtxtoutput" | awk '/IN.*TXT/ && length($6)>1 { print $6; }' FS='[\t ]' | sed  's/^["]*//g;s/["]*$//g') 
-    txtrecordslength=$(echo "$txtrecords" | sed  's/^[n ]*//g;s/[n ]*$//g' | wc -c) 
 
     # Step 3 - Use awk to pretty-print the output. There's less info available if the user 
     # supplies the ip address and so the following condition makes sure not to print 
@@ -124,9 +120,9 @@ function process_arg {
 
     # Step 4 - Print A Records, TXT Records and MX Records if any found
 
-    print_records "$arecords" "A" $arecordslength
-    print_records "$txtrecords" "TXT" $txtrecordslength
-    print_records "$mxrecords" "MX" $mxrecordslength
+    print_records "$arecords" "A"
+    print_records "$txtrecords" "TXT"
+    print_records "$mxrecords" "MX"
 }
 
 
