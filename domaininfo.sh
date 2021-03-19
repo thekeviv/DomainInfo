@@ -12,9 +12,14 @@ emailregex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([
 # Regex taken from https://stackoverflow.com/questions/3183444/check-for-valid-link-url but modified to make the protocol optional
 urlregex="[(https?|ftp|file)://]*[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]"
 
+# The function takes a name and a value obtained using the whois linux command and 
+# pretty prints it using awk
+
 function print_whois_value {
     awk -v name="$1" -v value="$2" 'BEGIN {printf "%-25s %1s %s\n", name":", "|", value}'
 }
+
+# The function takes dns records and pretty prints them using awk
 
 function print_records {
     # If there's more than one characters in the record, then print it
