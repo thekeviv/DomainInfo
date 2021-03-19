@@ -46,7 +46,7 @@ function process_arg {
     # if the supplied arg is an IP address, then find it's host name. Otherwise, find the IP address for the 
     # hostname
     
-    if [[ $1 =~ $ipregex ]]; 
+    if [[ $2 =~ "IP" ]]; 
     then
         echo "domaininfo - Querying domain info for IP Address: $1" 
         echo
@@ -91,7 +91,7 @@ function process_arg {
     # supplies the ip address and so the following condition makes sure not to print 
     # empty lines for the unavailable data
 
-    if [[ $1 =~ $ipregex ]]; 
+    if [[ $2 = "IP" ]]; 
     then
         print_whois_value "Domain Name" $domainname
         print_whois_value "IP Address" $ipaddress
@@ -123,7 +123,7 @@ function process_arg {
     fi
 
     # Step 4 - Print A Records, TXT Records and MX Records if any found
-    
+
     print_records "$arecords" "A" $arecordslength
     print_records "$txtrecords" "TXT" $txtrecordslength
     print_records "$mxrecords" "MX" $mxrecordslength
@@ -138,7 +138,7 @@ else
     # Step 1.a - Check if the input is an IPv4 address
     if [[ $1 =~ $ipregex ]]; 
     then 
-        process_arg "$1"
+        process_arg "$1" "IP"
     # Step 1.b - Check if the input is an Email
     elif [[ $1 =~ $emailregex ]];
     then
