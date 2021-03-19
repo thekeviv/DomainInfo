@@ -12,7 +12,20 @@ emailregex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([
 # Regex taken from https://stackoverflow.com/questions/3183444/check-for-valid-link-url but modified to make the protocol optional
 urlregex="[(https?|ftp|file)://]*[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]"
 
+function print_whois_value {
+    awk -v name="$1" -v value="$2" 'BEGIN {printf "%-25s %1s %s\n", name":", "|", value}'
+}
 
+function print_records {
+    if [[ $3 -gt 1 ]];
+    then
+        echo
+        echo "The following $2 Records for the domain/IP Address were found:"
+        echo
+        echo "$1" | awk '{ print $1; }'   
+        echo
+    fi
+}
 
 function process_arg {
     # Step 1 - Run the whois, dig and host commands and store their responses in variables
@@ -80,65 +93,40 @@ function process_arg {
 
     if [[ $1 =~ $ipregex ]]; 
     then
-        awk -v var="$domainname" 'BEGIN {printf "%-25s %1s %s\n", "Domain Name:", "|", var}'
-        awk -v var="$ipaddress" 'BEGIN {printf "%-25s %1s %s\n", "IP Address:", "|", var}'
-        awk -v var="$creationdate" 'BEGIN {printf "%-25s %1s %s\n", "Created On:", "|", var}'
-        awk -v var="$updatedate" 'BEGIN {printf "%-25s %1s %s\n", "Last Updated On:", "|", var}'
-        awk -v var="$registrantorgname" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Organization:", "|", var}'
-        awk -v var="$registrantcountry" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Country:", "|", var}'
-        awk -v var="$abusecontactemail" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Email:", "|", var}'
-        awk -v var="$abusecontactphone" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Phone:", "|", var}'
-
+        print_whois_value "Domain Name" $domainname
+        print_whois_value "IP Address" $ipaddress
+        print_whois_value "Created On" $creationdate
+        print_whois_value "Last Updated On" $updatedate
+        print_whois_value "Registrant Organization" "$registrantorgname"
+        print_whois_value "Registrant Country" $registrantcountry
+        print_whois_value "Abuse Contact Email" $abusecontactemail
+        print_whois_value "Abuse Contact Phone" $abusecontactphone
     else
-        awk -v var="$domainname" 'BEGIN {printf "%-25s %1s %s\n", "Domain Name:", "|", var}'
-        awk -v var="$ipaddress" 'BEGIN {printf "%-25s %1s %s\n", "IP Address:", "|", var}'
-        awk -v var="$creationdate" 'BEGIN {printf "%-25s %1s %s\n", "Created On:", "|", var}'
-        awk -v var="$updatedate" 'BEGIN {printf "%-25s %1s %s\n", "Last Updated On:", "|", var}'
-        awk -v var="$registrantname" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Name:", "|", var}'
-        awk -v var="$registrantorgname" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Organization:", "|", var}'
-        awk -v var="$registrantcountry" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Country:", "|", var}'
-        awk -v var="$registrarname" 'BEGIN {printf "%-25s %1s %s\n", "Registrar Name:", "|", var}'
-        awk -v var="$registrarurl" 'BEGIN {printf "%-25s %1s %s\n", "Registrar URL:", "|", var}'
-        awk -v var="$registrarwhoisserver" 'BEGIN {printf "%-25s %1s %s\n", "Registrar WHOIS Server:", "|", var}'
-        awk -v var="$adminname" 'BEGIN {printf "%-25s %1s %s\n", "Admin Name:", "|", var}'
-        awk -v var="$adminorg" 'BEGIN {printf "%-25s %1s %s\n", "Admin Organization:", "|", var}'
-        awk -v var="$adminemail" 'BEGIN {printf "%-25s %1s %s\n", "Admin Email:", "|", var}'
-        awk -v var="$techname" 'BEGIN {printf "%-25s %1s %s\n", "Tech Name:", "|", var}'
-        awk -v var="$techemail" 'BEGIN {printf "%-25s %1s %s\n", "Tech Email:", "|", var}'
-        awk -v var="$abusecontactemail" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Email:", "|", var}'
-        awk -v var="$abusecontactphone" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Phone:", "|", var}'
-        awk -v var="$dnsserver1address" 'BEGIN {printf "%-25s %1s %s\n", "DNS Server Address:", "|", var}'
+        print_whois_value "Domain Name" $domainname
+        print_whois_value "IP Address" $ipaddress
+        print_whois_value "Created On" $creationdate
+        print_whois_value "Last Updated On" $updatedate
+        print_whois_value "Registrant Organization" "$registrantorgname"
+        print_whois_value "Registrant Country" $registrantcountry
+        print_whois_value "Registrant Name" "$registrarname"
+        print_whois_value "Registrar URL" $registrarurl
+        print_whois_value "Registrar WHOIS Server" $registrarwhoisserver
+        print_whois_value "Admin Name" "$adminname"
+        print_whois_value "Admin Organization" "$adminorg"
+        print_whois_value "Admin Email" "$adminemail"
+        print_whois_value "Tech Name" $techname
+        print_whois_value "Tech Email" $techemail
+        print_whois_value "Abuse Contact Email" $abusecontactemail
+        print_whois_value "Abuse Contact Phone" $abusecontactphone
+        print_whois_value "DNS Server 1 Address" $dnsserver1address
 
     fi
 
     # Step 4 - Print A Records, TXT Records and MX Records if any found
-
-    if [[ arecordslength -gt 1 ]];
-    then
-        echo
-        echo "The following A Records for the domain/IP Address were found:"
-        echo
-        echo "$arecords" | awk '{ print $1; }'   
-        echo
-    fi
-
-    if [[ txtrecordslength -gt 1 ]];
-    then
-        echo
-        echo "The following TXT Records for the domain/IP Address were found:"
-        echo
-        echo "$txtrecords" | awk '{ print $1; }'   
-        echo
-    fi
-
-    if [[ mxrecordslength -gt 1 ]];
-    then
-        echo
-        echo "The following MX Records for the domain/IP Address were found:"
-        echo
-        echo "$mxrecords" | awk '{ print $1; }'   
-        echo
-    fi
+    
+    print_records "$arecords" "A" $arecordslength
+    print_records "$txtrecords" "TXT" $txtrecordslength
+    print_records "$mxrecords" "MX" $mxrecordslength
 }
 
 
