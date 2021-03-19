@@ -19,6 +19,7 @@ function process_arg {
     # -H argument specifies to not include the legal stuff
     whoisoutput=$(whois -H $1)
     hostoutput=$(host $1)
+    digoutput=$(host $1)
     orgname="OrgName"
     # The whois output has the following variable values stored, the awk commands below find
     # the first and then exits and stores it in the domain name variable. ': ' is used as the 
@@ -45,6 +46,10 @@ function process_arg {
     registrarname=$(echo "$whoisoutput" | awk '/Registrar:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     registrarurl=$(echo "$whoisoutput" | awk '/Registrar URL:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     registrarwhoisserver=$(echo "$whoisoutput" | awk '/Registrar WHOIS Server:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    adminname=$(echo "$whoisoutput" | awk '/Admin Organization:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    adminemail=$(echo "$whoisoutput" | awk '/Admin Email:/ { print $2; exit; }' FS=': ')
+    techname=$(echo "$whoisoutput" | awk '/Tech Organization:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    techemail=$(echo "$whoisoutput" | awk '/Tech Email:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     creationdate=$(echo "$whoisoutput" | awk '/Creation Date:/ || /RegDate/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     updatedate=$(echo "$whoisoutput" | awk '/Updated Date:/ || /Updated/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
     abusecontactemail=$(echo "$whoisoutput" | awk '/Abuse Contact Email:/ || /OrgAbuseEmail/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
@@ -56,13 +61,17 @@ function process_arg {
 
     awk -v var="$domainname" 'BEGIN {printf "%-25s %1s %s\n", "Domain Name:", "|", var}'
     awk -v var="$ipaddress" 'BEGIN {printf "%-25s %1s %s\n", "IP Address:", "|", var}'
+    awk -v var="$creationdate" 'BEGIN {printf "%-25s %1s %s\n", "Created On:", "|", var}'
+    awk -v var="$updatedate" 'BEGIN {printf "%-25s %1s %s\n", "Last Updated On:", "|", var}'
     awk -v var="$registrantorgname" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Name:", "|", var}'
     awk -v var="$registrantcountry" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Country:", "|", var}'
     awk -v var="$registrarname" 'BEGIN {printf "%-25s %1s %s\n", "Registrar Name:", "|", var}'
     awk -v var="$registrarurl" 'BEGIN {printf "%-25s %1s %s\n", "Registrar URL:", "|", var}'
     awk -v var="$registrarwhoisserver" 'BEGIN {printf "%-25s %1s %s\n", "Registrar WHOIS Server:", "|", var}'
-    awk -v var="$creationdate" 'BEGIN {printf "%-25s %1s %s\n", "Created On:", "|", var}'
-    awk -v var="$updatedate" 'BEGIN {printf "%-25s %1s %s\n", "Last Updated On:", "|", var}'
+    awk -v var="$adminname" 'BEGIN {printf "%-25s %1s %s\n", "Admin Name:", "|", var}'
+    awk -v var="$adminemail" 'BEGIN {printf "%-25s %1s %s\n", "Admin Email:", "|", var}'
+    awk -v var="$techname" 'BEGIN {printf "%-25s %1s %s\n", "Tech Name:", "|", var}'
+    awk -v var="$techemail" 'BEGIN {printf "%-25s %1s %s\n", "Tech Email:", "|", var}'
     awk -v var="$abusecontactemail" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Email:", "|", var}'
     awk -v var="$abusecontactphone" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Phone:", "|", var}'
     awk -v var="$dnsserver1address" 'BEGIN {printf "%-25s %1s %s\n", "DNS Server Address:", "|", var}'
