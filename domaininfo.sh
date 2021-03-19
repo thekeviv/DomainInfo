@@ -18,26 +18,54 @@ function process_arg {
     # Step 1 - Run the awk command and store the response in the whoisoutput variable.
     # -H argument specifies to not include the legal stuff
     whoisoutput=$(whois -H $1)
+    hostoutput=$(host $1)
     orgname="OrgName"
     # The whois output has the following variable values stored, the awk commands below find
     # the first and then exits and stores it in the domain name variable. ': ' is used as the 
-    # delimiter value
-    domainname=$(echo "$whoisoutput" | awk '/Domain Name:/ { print $2; exit; }' FS=:)
-    registrantorgname=$(echo "$whoisoutput" | awk '/Registrant Organization:/ || /OrgName/ { print $2; exit; }' FS=': ')
-    registrantcountry=$(echo "$whoisoutput" | awk '/Registrant Country:/ || /Country/ { print $2; exit; }' FS=': ')
-    creationdate=$(echo "$whoisoutput" | awk '/Creation Date:/ || /RegDate/ { print $2; exit; }' FS=': ')
-    updatedate=$(echo "$whoisoutput" | awk '/Updated Date:/ || /Updated/ { print $2; exit; }' FS=': ')
-    abusecontactemail=$(echo "$whoisoutput" | awk '/Abuse Contact Email:/ || /OrgAbuseEmail/ { print $2; exit; }' FS=': ')
-    abusecontactphone=$(echo "$whoisoutput" | awk '/Abuse Contact Phone:/ || /OrgAbusePhone/ { print $2; exit; }' FS=': ')
-    echo $domainname
-    echo $registrantorgname
-    echo $registrantcountry
-    echo $creationdate
-    echo $updatedate
-    echo $abusecontactemail
-    echo $abusecontactphone
+    # delimiter value. For output consistency, any spaces are removed with sed.
+    # Regex to remove trailing and ending spaces taken from 
+    # https://www.golinuxhub.com/2017/06/sed-remove-all-leading-and-ending-blank/
 
+    # if the supplied arg is an IP address, then find it's host name. Otherwise, find the IP address for the 
+    # hostname
+    if [[ $1 =~ $ipregex ]]; 
+    then
+        echo "domaininfo - Querying domain info for IP Address: $1" 
+        echo
+        domainname=$(echo "$hostoutput" | awk '{ print $5; exit; }')
+        ipaddress=$1
+    else
+        echo "domaininfo - Querying domain info for domain: $1"
+        echo
+        domainname=$(echo "$whoisoutput" | awk '/Domain Name:/ { print $2; exit; }' FS=': ')
+        ipaddress=$(echo "$hostoutput" | awk '{ print $4; exit; }')
+    fi
+    registrantorgname=$(echo "$whoisoutput" | awk '/Registrant Organization:/ || /OrgName:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g') 
+    registrantcountry=$(echo "$whoisoutput" | awk '/Registrant Country:/ || /Country/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    registrarname=$(echo "$whoisoutput" | awk '/Registrar:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    registrarurl=$(echo "$whoisoutput" | awk '/Registrar URL:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    registrarwhoisserver=$(echo "$whoisoutput" | awk '/Registrar WHOIS Server:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    creationdate=$(echo "$whoisoutput" | awk '/Creation Date:/ || /RegDate/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    updatedate=$(echo "$whoisoutput" | awk '/Updated Date:/ || /Updated/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    abusecontactemail=$(echo "$whoisoutput" | awk '/Abuse Contact Email:/ || /OrgAbuseEmail/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    abusecontactphone=$(echo "$whoisoutput" | awk '/Abuse Contact Phone:/ || /OrgAbusePhone/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    dnsserver1address=$(echo "$whoisoutput" | awk '/Name Server:/ { print $2; exit; }' FS=': ' | sed  's/^[t ]*//g;s/[t ]*$//g')
+    
 
+    # Step 2 - Use awk to pretty-print the output
+
+    awk -v var="$domainname" 'BEGIN {printf "%-25s %1s %s\n", "Domain Name:", "|", var}'
+    awk -v var="$ipaddress" 'BEGIN {printf "%-25s %1s %s\n", "IP Address:", "|", var}'
+    awk -v var="$registrantorgname" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Name:", "|", var}'
+    awk -v var="$registrantcountry" 'BEGIN {printf "%-25s %1s %s\n", "Registrant Country:", "|", var}'
+    awk -v var="$registrarname" 'BEGIN {printf "%-25s %1s %s\n", "Registrar Name:", "|", var}'
+    awk -v var="$registrarurl" 'BEGIN {printf "%-25s %1s %s\n", "Registrar URL:", "|", var}'
+    awk -v var="$registrarwhoisserver" 'BEGIN {printf "%-25s %1s %s\n", "Registrar WHOIS Server:", "|", var}'
+    awk -v var="$creationdate" 'BEGIN {printf "%-25s %1s %s\n", "Created On:", "|", var}'
+    awk -v var="$updatedate" 'BEGIN {printf "%-25s %1s %s\n", "Last Updated On:", "|", var}'
+    awk -v var="$abusecontactemail" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Email:", "|", var}'
+    awk -v var="$abusecontactphone" 'BEGIN {printf "%-25s %1s %s\n", "Abuse Contact Phone:", "|", var}'
+    awk -v var="$dnsserver1address" 'BEGIN {printf "%-25s %1s %s\n", "DNS Server Address:", "|", var}'
 
 }
 
