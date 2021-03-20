@@ -8,31 +8,38 @@ the script will not work on Windows unless you use WSL.
 ```shell
 
 ./domaininfo.sh cnn.com
+██████╗  ██████╗ ███╗   ███╗ █████╗ ██╗███╗   ██╗██╗███╗   ██╗███████╗ ██████╗ 
+██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝██╔═══██╗
+██║  ██║██║   ██║██╔████╔██║███████║██║██╔██╗ ██║██║██╔██╗ ██║█████╗  ██║   ██║
+██║  ██║██║   ██║██║╚██╔╝██║██╔══██║██║██║╚██╗██║██║██║╚██╗██║██╔══╝  ██║   ██║
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║  ██║██║██║ ╚████║██║██║ ╚████║██║     ╚██████╔╝
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ 
+                                                                               
+
 domaininfo - Querying domain info for domain: cnn.com
 
 Domain Name:              | CNN.COM
-IP Address:               | 151.101.129.67
+IP Address:               | 151.101.65.67
 Created On:               | 1993-09-22T04:00:00Z
 Last Updated On:          | 2018-04-10T16:43:38Z
-Registrant Name:          | Domain Name Manager
 Registrant Organization:  | Turner Broadcasting System, Inc.
 Registrant Country:       | US
-Registrar Name:           | CSC Corporate Domains, Inc.
+Registrant Name:          | CSC Corporate Domains, Inc.
 Registrar URL:            | http://cscdbs.com
 Registrar WHOIS Server:   | whois.corporatedomains.com
 Admin Name:               | Domain Name Manager
 Admin Organization:       | Turner Broadcasting System, Inc.
 Admin Email:              | tmgroup@turner.com
-Tech Name:                | Turner Broadcasting System, Inc.
+Tech Name:                | Turner
 Tech Email:               | hostmaster@turner.com
 Abuse Contact Email:      | domainabuse@cscglobal.com
 Abuse Contact Phone:      | 8887802723
-DNS Server Address:       | NS-1086.AWSDNS-07.ORG
+DNS Server 1 Address:     | NS-1086.AWSDNS-07.ORG
 
 The following A Records for the domain/IP Address were found:
 
-151.101.129.67
 151.101.65.67
+151.101.129.67
 151.101.1.67
 151.101.193.67
 
