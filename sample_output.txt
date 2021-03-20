@@ -1,31 +1,38 @@
 1. cnn.com
 
 ./domaininfo.sh cnn.com
+██████╗  ██████╗ ███╗   ███╗ █████╗ ██╗███╗   ██╗██╗███╗   ██╗███████╗ ██████╗ 
+██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝██╔═══██╗
+██║  ██║██║   ██║██╔████╔██║███████║██║██╔██╗ ██║██║██╔██╗ ██║█████╗  ██║   ██║
+██║  ██║██║   ██║██║╚██╔╝██║██╔══██║██║██║╚██╗██║██║██║╚██╗██║██╔══╝  ██║   ██║
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║  ██║██║██║ ╚████║██║██║ ╚████║██║     ╚██████╔╝
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ 
+                                                                               
+
 domaininfo - Querying domain info for domain: cnn.com
 
 Domain Name:              | CNN.COM
-IP Address:               | 151.101.129.67
+IP Address:               | 151.101.65.67
 Created On:               | 1993-09-22T04:00:00Z
 Last Updated On:          | 2018-04-10T16:43:38Z
-Registrant Name:          | Domain Name Manager
 Registrant Organization:  | Turner Broadcasting System, Inc.
 Registrant Country:       | US
-Registrar Name:           | CSC Corporate Domains, Inc.
+Registrant Name:          | CSC Corporate Domains, Inc.
 Registrar URL:            | http://cscdbs.com
 Registrar WHOIS Server:   | whois.corporatedomains.com
 Admin Name:               | Domain Name Manager
 Admin Organization:       | Turner Broadcasting System, Inc.
 Admin Email:              | tmgroup@turner.com
-Tech Name:                | Turner Broadcasting System, Inc.
+Tech Name:                | Turner
 Tech Email:               | hostmaster@turner.com
 Abuse Contact Email:      | domainabuse@cscglobal.com
 Abuse Contact Phone:      | 8887802723
-DNS Server Address:       | NS-1086.AWSDNS-07.ORG
+DNS Server 1 Address:     | NS-1086.AWSDNS-07.ORG
 
 The following A Records for the domain/IP Address were found:
 
-151.101.129.67
 151.101.65.67
+151.101.129.67
 151.101.1.67
 151.101.193.67
 
@@ -87,26 +94,33 @@ mxa-00241e02.gslb.pphosted.com.
 2. yahoo.ca
 
 ./domaininfo.sh yahoo.ca
+██████╗  ██████╗ ███╗   ███╗ █████╗ ██╗███╗   ██╗██╗███╗   ██╗███████╗ ██████╗ 
+██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝██╔═══██╗
+██║  ██║██║   ██║██╔████╔██║███████║██║██╔██╗ ██║██║██╔██╗ ██║█████╗  ██║   ██║
+██║  ██║██║   ██║██║╚██╔╝██║██╔══██║██║██║╚██╗██║██║██║╚██╗██║██╔══╝  ██║   ██║
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║  ██║██║██║ ╚████║██║██║ ╚████║██║     ╚██████╔╝
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ 
+                                                                               
+
 domaininfo - Querying domain info for domain: yahoo.ca
 
 Domain Name:              | yahoo.ca
 IP Address:               | 98.136.103.23
 Created On:               | 2000-10-04T00:08:36Z
 Last Updated On:          | 2020-09-21T04:03:42Z
-Registrant Name:          | Oath (Canada) Corp.
 Registrant Organization:  | 
 Registrant Country:       | CA
-Registrar Name:           | MarkMonitor International Canada Ltd.
+Registrant Name:          | MarkMonitor International Canada Ltd.
 Registrar URL:            | Markmonitor.com
 Registrar WHOIS Server:   | whois.ca.fury.ca
 Admin Name:               | Andres Lorca
 Admin Organization:       | Oath (Canada) Corp.
 Admin Email:              | domain-admin@oath.com
-Tech Name:                | Oath (Canada) Corp.
+Tech Name:                | Oath
 Tech Email:               | domain-admin@oath.com
 Abuse Contact Email:      | 
 Abuse Contact Phone:      | 
-DNS Server Address:       | ns1.yahoo.com
+DNS Server 1 Address:     | ns1.yahoo.com
 
 The following A Records for the domain/IP Address were found:
 
@@ -122,11 +136,20 @@ v=spf1
 
 The following MX Records for the domain/IP Address were found:
 
-mta7.am0.yahoodns.net.
 mta6.am0.yahoodns.net.
+mta7.am0.yahoodns.net.
 mta5.am0.yahoodns.net.
 
 3. uvic.ca
+
+./domaininfo.sh uvic.ca
+██████╗  ██████╗ ███╗   ███╗ █████╗ ██╗███╗   ██╗██╗███╗   ██╗███████╗ ██████╗ 
+██╔══██╗██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝██╔═══██╗
+██║  ██║██║   ██║██╔████╔██║███████║██║██╔██╗ ██║██║██╔██╗ ██║█████╗  ██║   ██║
+██║  ██║██║   ██║██║╚██╔╝██║██╔══██║██║██║╚██╗██║██║██║╚██╗██║██╔══╝  ██║   ██║
+██████╔╝╚██████╔╝██║ ╚═╝ ██║██║  ██║██║██║ ╚████║██║██║ ╚████║██║     ╚██████╔╝
+╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ 
+                                                                               
 
 domaininfo - Querying domain info for domain: uvic.ca
 
@@ -134,20 +157,19 @@ Domain Name:              | uvic.ca
 IP Address:               | 142.104.197.120
 Created On:               | 2000-10-02T20:46:49Z
 Last Updated On:          | 2021-01-22T16:02:09Z
-Registrant Name:          | University of Victoria
 Registrant Organization:  | 
 Registrant Country:       | CA
-Registrar Name:           | Webnames.ca Inc.
+Registrant Name:          | Webnames.ca Inc.
 Registrar URL:            | www.webnames.ca
 Registrar WHOIS Server:   | whois.ca.fury.ca
 Admin Name:               | Jane Godfrey
 Admin Organization:       | University of Victoria
 Admin Email:              | jgodfrey@uvic.ca
-Tech Name:                | University of Victoria
+Tech Name:                | University
 Tech Email:               | netadmin@uvic.ca
 Abuse Contact Email:      | 
 Abuse Contact Phone:      | 
-DNS Server Address:       | dns1.uvic.ca
+DNS Server 1 Address:     | dns1.uvic.ca
 
 The following A Records for the domain/IP Address were found:
 
@@ -163,10 +185,9 @@ RjMnKW4rPTiJX6DUqsgbP5DuLUD8d8ocdsiXQrVZ54LXwcOykfLxB66TiAUEa31xUe1RwJsRgxPPKp/q
 The following MX Records for the domain/IP Address were found:
 
 smtpr.uvic.ca.
-smtpv.uvic.ca.
-smtpz.uvic.ca.
 smtpu.uvic.ca.
 smtps.uvic.ca.
 smtpw.uvic.ca.
 smtpy.uvic.ca.
-
+smtpv.uvic.ca.
+smtpz.uvic.ca.
